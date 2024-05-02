@@ -6,6 +6,9 @@ const userRouter = require('./routes/userRoute')
 const app = express()
 const PORT = Config.PORT || 5000
 
+// middleware
+app.use(express.urlencoded({ extended: false }))
+
 //server
 dbConnection()
 

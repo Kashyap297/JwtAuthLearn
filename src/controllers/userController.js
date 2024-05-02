@@ -19,6 +19,7 @@ const userController = {
                 data
             })
         } catch (error) {
+            console.error('Error creating user:', error);
             res.status(500).json({
                 message: 'Error while creating user in DB',
                 success: false
