@@ -3,7 +3,7 @@ const dbConnection = require('./config/db')
 const Config = require('./config')
 
 const app = express()
-const PORT = Config.PORT
+const PORT = Config.PORT || 5000
 
 //server
 dbConnection()
