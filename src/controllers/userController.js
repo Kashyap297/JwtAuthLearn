@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel")
+const bcryptjs = require('bcryptjs')
 
 const userController = {
     create: async (req, res) => {
@@ -12,7 +13,13 @@ const userController = {
                     success: false
                 })
             }
-            const data = await userModel.create({ username, email, password })
+
+            // hashing password
+            const _SALT_ROUND = 10;
+            const hashedPassword = await bcryptjs.hash(password, _SALT_ROUND)
+            console.log(hashedPassword)
+
+            const data = await userModel.create({ username, email, password : hashedPassword })
             res.status(201).json({
                 message: 'SignUp Successfully',
                 success: true,
