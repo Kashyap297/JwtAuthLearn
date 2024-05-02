@@ -8,6 +8,7 @@ const PORT = Config.PORT || 5000
 
 // middleware
 app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 //server
 dbConnection()

@@ -1,5 +1,7 @@
+const jwt = require("jsonwebtoken")
 const userModel = require("../models/userModel")
 const bcryptjs = require('bcryptjs')
+const Config = require("../config")
 
 const userController = {
     create: async (req, res) => {
@@ -54,9 +56,20 @@ const userController = {
                 })
             }
 
+            // jwt token generate
+            const payload = {
+                sub: user._id,
+                username: user.username
+            }
+
+            const token = jwt.sign(payload, Config.JWT_SECRET, {
+                expiresIn: "1m"
+            })
+            console.log(token)
             res.json({
                 message: "Login Successfull",
-                success: true
+                success: true,
+                token
             })
 
         } catch (error) {
