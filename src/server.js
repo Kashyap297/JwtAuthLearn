@@ -1,7 +1,14 @@
 const express = require('express')
+const dbConnection = require('./config/db')
+const Config = require('./config')
 
 const app = express()
-const PORT = 8000
+const PORT = Config.PORT
+
+//server
+dbConnection()
+
+// routes
 
 app.listen(PORT, (err) => {
     if (err) {
