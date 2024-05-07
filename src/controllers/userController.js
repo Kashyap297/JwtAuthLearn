@@ -66,7 +66,12 @@ const userController = {
                 expiresIn: "1d"
             })
 
-            console.log(token)
+            // console.log(token)
+
+            res.cookie('token', token, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24 //24 Hr
+            })
 
             res.json({
                 message: "Login Successfull",
@@ -89,9 +94,9 @@ const userController = {
             const user = await userModel.findById(payload.sub).select('-password -createdAt -updatedAt -__v')
             // console.log(user)
             res.status(404).json({
-                message : "self",
-                success : true,
-                data : user
+                message: "self",
+                success: true,
+                data: user
             })
 
         } catch (error) {
