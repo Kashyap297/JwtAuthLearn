@@ -63,9 +63,11 @@ const userController = {
             }
 
             const token = jwt.sign(payload, Config.JWT_SECRET, {
-                expiresIn: "1m"
+                expiresIn: "1d"
             })
+
             console.log(token)
+
             res.json({
                 message: "Login Successfull",
                 success: true,
@@ -76,6 +78,26 @@ const userController = {
             console.error('Error while login user:', error);
             res.status(500).json({
                 message: 'Error while login user in DB',
+                success: false
+            })
+        }
+    },
+    self: async (req, res) => {
+        try {
+            const payload = req.user
+            // console.log(payload)
+            const user = await userModel.findById(payload.sub).select('-password -createdAt -updatedAt -__v')
+            // console.log(user)
+            res.status(404).json({
+                message : "self",
+                success : true,
+                data : user
+            })
+
+        } catch (error) {
+            console.error('Error Self user:', error);
+            res.status(500).json({
+                message: 'Error ',
                 success: false
             })
         }
