@@ -19,7 +19,7 @@ const userController = {
             // hashing password
             const _SALT_ROUND = 10;
             const hashedPassword = await bcryptjs.hash(password, _SALT_ROUND)
-            console.log(hashedPassword)
+            // console.log(hashedPassword)
 
             const data = await userModel.create({ username, email, password: hashedPassword })
             res.status(201).json({

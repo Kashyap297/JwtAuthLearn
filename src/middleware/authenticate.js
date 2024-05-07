@@ -17,7 +17,7 @@ const authenticate = (req, res, next) => {
         // const payload = jwt.verify(token, Config.JWT_SECRET)
         
         const accessToken = token.split(' ')[1]
-        console.log(accessToken)
+        // console.log(accessToken)
 
         const payload = jwt.verify(accessToken, Config.JWT_SECRET, (err, decoded) => {
             if(err){
@@ -28,7 +28,7 @@ const authenticate = (req, res, next) => {
             }
             return decoded
         })
-        console.log(payload)
+        // console.log(payload)
         if(!payload){
             return res.status(401).json({
                 message : "Token not Found or Invalid",
